@@ -1,7 +1,7 @@
 <template>
 	<view class="">
 		<transition-group name="PingTu" class="PingTu">
-			<VUnitview class="item" :class="'pt_item_' + item" :style="[itemStyle,{'background-image': 'url('+url+')'}]" v-for="(item,index) in levelArray"
+			<VUnitview class="item" :class="'pt_item_' + item" :style="[itemStyle,{'background-image': 'url('+imageArray[imgIndex]+')'}]" v-for="(item,index) in levelArray"
 			 :data-index="index" :key="item" @tap="change"></VUnitview>
 		</transition-group>
 		<view class="btn-group">
@@ -16,6 +16,8 @@
 <script>
 	let that;
 	let level = 3;
+	let imgNumber=5;
+	
 	export default {
 		props: {
 			url: {
@@ -23,7 +25,13 @@
 			},
 			timeOut: {
 				default: -1
-			}
+			},
+			
+			//imageArray:{
+			//	type:Array,
+			//	default:()=>["../../static/lupin.jpg","http://cdn.test.lfwellness.cn/pintu/xinpin.jpg"]
+			//}
+			
 		},
 		data() {
 			return {
@@ -32,6 +40,14 @@
 				startText: '开始游戏',
 				gameStart: false,
 				timeCounter: null,
+				imgIndex:0,
+				imageArray:["../../static/pintupicture/p1.jpg",
+							"../../static/pintupicture/p2.jpg",
+							"../../static/pintupicture/p3.jpg",
+							"../../static/pintupicture/p4.jpg",
+							"../../static/pintupicture/p5.jpg"
+							]
+							
 			};
 		},
 		created() {
@@ -288,7 +304,9 @@
 		
 			change_image()
 			{
-				that.url='http://cdn.test.lfwellness.cn/pintu/xinpin.jpg';
+				let that=this;
+				that.imgIndex=(that.imgIndex+1)%imgNumber;
+				//that.url='http://cdn.test.lfwellness.cn/pintu/xinpin.jpg';
 				that.start();
 			},
 			start() {

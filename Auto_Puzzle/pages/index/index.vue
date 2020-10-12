@@ -9,7 +9,7 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				//title: 'Hello'
 			}
 		},
 		onLoad() {
